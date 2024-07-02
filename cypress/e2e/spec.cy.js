@@ -58,14 +58,60 @@ describe('template spec', () => {
   });
 
   it('Cadastra três tarefas e marca todas como completas', () => {
+    cy.visit('http://127.0.0.1:7001');
 
+    cy.get('.new-todo')
+      .type('Tarefa 1{enter}')
+      .type('Tarefa 2{enter}')
+      .type('Tarefa 3{enter}');
+    
+    cy.get('.toggle-all-label')
+      .first()
+      .click();
+    
+    cy.get('.todo-list li')
+      .should('have.class', 'completed');
   });
 
   it('Cadastra três tarefas, marca duas como completas e limpa todas tarefas completas', () => {
+    cy.visit('http://127.0.0.1:7001');
 
+    cy.get('.new-todo')
+      .type('Tarefa 1{enter}')
+      .type('Tarefa 2{enter}')
+      .type('Tarefa 3{enter}');
+    
+    cy.get('.todo-list li .toggle')
+      .eq(1)
+      .click();
+
+    cy.get('.todo-list li .toggle')
+      .eq(2)
+      .click();
+
+    cy.get('.clear-completed')
+      .first()
+      .click();
+
+    cy.get('.todo-list li')
+      .should('have.length', 1);
   });
 
   it('Cadastra uma tarefa, marca como concluida e volta ao estado anterior', () => {
+    cy.visit('http://127.0.0.1:7001');
 
+    cy.get('.new-todo')
+      .type('Tarefa 1{enter}');
+    
+    cy.get('.todo-list li .toggle')
+      .first()
+      .click();
+
+    cy.get('.todo-list li .toggle')
+      .first()
+      .click();
+
+    cy.get('.todo-list li')
+      .should('not.have.class', 'completed');
   });
 });
