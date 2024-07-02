@@ -56,4 +56,16 @@ describe('template spec', () => {
     cy.get('.todo-list li')
       .should('have.length', 2);
   });
+
+  it('Cadastra três tarefas e marca todas como completas', () => {
+
+  });
+
+  it('Cadastra três tarefas, marca duas como completas e limpa todas tarefas completas', () => {
+
+  });
+
+  it('Cadastra uma tarefa, marca como concluida e volta ao estado anterior', () => {
+
+  });
 });
